@@ -1,0 +1,8 @@
+spring:
+  jpa:
+  datasource:
+    url : jdbc:postgresql://localhost:5432/registration_system
+    username : postgres
+    password : postgres
+
+flyway:

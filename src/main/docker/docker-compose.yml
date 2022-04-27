@@ -1,0 +1,30 @@
+version: '3.1'
+
+services:
+  app:
+    image: 'school-registration-system:0.0.1-SNAPSHOT'
+    build:
+      context: .
+    container_name: app
+    depends_on:
+      - db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/registration_system
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=password
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    ports:
+      - "8080:8080"
+
+  db:
+    image: 'postgres:latest'
+    container_name: db
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - APP_DB_USER=root
+      - APP_DB_PASS=password
+      - APP_DB_NAME=registration_system
+    volumes:
+      - ./db:/docker-entrypoint-initdb.d/
